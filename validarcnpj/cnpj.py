@@ -6,12 +6,17 @@ REGRESSIVOS = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
 def valida(cnpj):
     cnpj = apenas_numeros(cnpj)
 
-    if eh_sequencia(cnpj):
-        # print('É uma sequencia')
+    try:
+        if eh_sequencia(cnpj):
+            return False
+    except:
         return False
 
-    novo_cnpj = calcula_digito(cnpj=cnpj, digito=1)
-    novo_cnpj = calcula_digito(cnpj=novo_cnpj, digito=2)
+    try:
+        novo_cnpj = calcula_digito(cnpj=cnpj, digito=1)
+        novo_cnpj = calcula_digito(cnpj=novo_cnpj, digito=2)
+    except Exception as e:
+        return False
 
     if novo_cnpj == cnpj:
         return True
